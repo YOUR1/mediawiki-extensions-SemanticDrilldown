@@ -379,6 +379,9 @@ END;
 	 */
 	private function printFilterValue( $filter, $value ) {
 		$value = str_replace( '_', ' ', $value );
+		// Escape the value (this prevents users from putting <script>...</script> in the get parameters.)
+		$value = htmlspecialchars( $value, ENT_QUOTES, 'UTF-8' );
+		
 		// if it's boolean, display something nicer than "0" or "1"
 		if ( $value === ' other' ) {
 			return wfMessage( 'sd_browsedata_other' )->text();
